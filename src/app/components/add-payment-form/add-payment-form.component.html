@@ -1,0 +1,47 @@
+<!-- <div class="col-md-5 d-flex"> -->
+<form [formGroup]="formAdd" (ngSubmit)="add()">
+  <h2>Add <b>Payment</b></h2>
+  <div class="mb-3">
+    <label class="form-label">Card Owner Name</label>
+    <input formControlName="cardOwnerName" type="text" class="form-control" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Card Number</label>
+    <input formControlName="cardNumber" type="text" class="form-control" />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-check-label">Expiration Date (MM/YY ex.01/22)</label>
+    <div class="row">
+      <div class="col-md-3 d-flex">
+        <input
+          formControlName="month"
+          type="text"
+          class="form-control"
+          placeholder="month"
+        />
+      </div>
+
+      <div class="col-md-3 d-flex">
+        <input
+          formControlName="year"
+          type="text"
+          class="form-control"
+          placeholder="Year"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-check-label">Security Code</label>
+    <input
+      formControlName="securityCode"
+      type="password"
+      class="form-control"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<!-- </div> -->

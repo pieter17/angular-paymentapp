@@ -1,0 +1,86 @@
+<div
+  class="modal fade"
+  id="editEmployeeModal"
+  tabindex="-1"
+  aria-labelledby="editEmployeeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editForm" (ngSubmit)="putPayment()">
+          <h2>Edit <b>Payment</b></h2>
+          <div class="mb-3">
+            <label class="form-label">Payment Detail Id</label>
+            <input
+              formControlName="paymentDetailId"
+              type="text"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Card Owner Name</label>
+            <input
+              formControlName="cardOwnerName"
+              type="text"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Card Number</label>
+            <input
+              formControlName="cardNumber"
+              type="text"
+              class="form-control"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-check-label"
+              >Expiration Date (MM/YY ex.01/22)</label
+            >
+            <div class="row">
+              <div class="col-md-3 d-flex">
+                <input
+                  formControlName="month"
+                  type="text"
+                  class="form-control"
+                  placeholder="month"
+                />
+              </div>
+
+              <div class="col-md-3 d-flex">
+                <input
+                  formControlName="year"
+                  type="text"
+                  class="form-control"
+                  placeholder="Year"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              id="cancelbtn"
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <input type="submit" class="btn btn-success" value="Save Update" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
