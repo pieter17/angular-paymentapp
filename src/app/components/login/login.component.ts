@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
   submit() {
     this.authService.login(this.registerForm.value).subscribe(
       (res) => {
-        console.log(res);
         if (res) {
           this.authService.setAuthorizationToken(res.token, res.refreshToken);
           this.registerForm.reset();

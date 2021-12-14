@@ -4,44 +4,92 @@
   <div class="mb-3">
     <label class="form-label">Card Owner Name</label>
     <input formControlName="cardOwnerName" type="text" class="form-control" />
+    <div
+      *ngIf="form.cardOwnerName.touched && form.cardOwnerName.invalid"
+      class="alert alert-danger"
+    >
+      <div *ngIf="form.cardOwnerName.errors?.required">
+        cardOwnerName is required.
+      </div>
+    </div>
   </div>
   <div class="mb-3">
     <label class="form-label">Card Number</label>
     <input formControlName="cardNumber" type="text" class="form-control" />
+    <div
+      *ngIf="form.cardNumber.touched && form.cardNumber.invalid"
+      class="alert alert-danger"
+    >
+      <div *ngIf="form.cardNumber.errors?.required">
+        cardNumber is required.
+      </div>
+      <div *ngIf="form.cardNumber.errors?.pattern">Enter only number.</div>
+    </div>
   </div>
 
   <div class="mb-3">
-    <label class="form-check-label">Expiration Date (MM/YY ex.01/22)</label>
+    <label class="form-check-label">Expiration Date (MM/YY ex.1/22)</label>
     <div class="row">
-      <div class="col-md-3 d-flex">
+      <div class="col-md-5">
         <input
           formControlName="month"
           type="text"
           class="form-control"
           placeholder="month"
         />
+        <div
+          *ngIf="form.month.touched && form.month.invalid"
+          class="alert alert-danger"
+        >
+          <div *ngIf="form.month.errors?.required">month is required.</div>
+          <div *ngIf="form.month.errors?.pattern">
+            Enter only number in month (1-12).
+          </div>
+          <div *ngIf="form.month.errors?.max">max month 12 (december).</div>
+          <div *ngIf="form.month.errors?.min">min month 1 (january).</div>
+        </div>
       </div>
 
-      <div class="col-md-3 d-flex">
+      <div class="col-md-5">
         <input
           formControlName="year"
           type="text"
           class="form-control"
           placeholder="Year"
         />
+        <div
+          *ngIf="form.year.touched && form.year.invalid"
+          class="alert alert-danger"
+        >
+          <div *ngIf="form.year.errors?.required">year is required.</div>
+          <div *ngIf="form.year.errors?.pattern">
+            Enter only number in year format (YY).
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="mb-3">
-    <label class="form-check-label">Security Code</label>
+    <label class="form-check-label">Security Code (must 3 number)</label>
     <input
       formControlName="securityCode"
       type="password"
       class="form-control"
     />
+    <div
+      *ngIf="form.securityCode.touched && form.securityCode.invalid"
+      class="alert alert-danger"
+    >
+      <div *ngIf="form.securityCode.errors?.required">
+        securityCode is required.
+      </div>
+      <div *ngIf="form.securityCode.errors?.pattern">Enter only number.</div>
+    </div>
   </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!formAdd.valid">
+    Submit
+  </button>
 </form>
 <!-- </div> -->

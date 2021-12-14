@@ -35,6 +35,11 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  updatePaymentTrigger() {
+    this.getAllPayments();
+    this.toastr.warning('Update Successfully');
+  }
+
   newItemTrigger(res: PaymentDetail) {
     this.getAllPayments();
     this.toastr.success('Added Succsessfully');
@@ -57,6 +62,7 @@ export class HomeComponent implements OnInit {
         (res) => {
           alert(`Payment ${id} Deleted Successfully`);
           this.getAllPayments();
+          this.toastr.error(`Id ${id} deleted successfully`);
         },
         (err) => {
           console.log(err);
