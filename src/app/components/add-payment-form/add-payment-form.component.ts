@@ -2,6 +2,7 @@ import { PaymentDetail } from './../../models/paymentDetail';
 import { PaymentDetailService } from './../../shared/payment-detail.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-add-payment-form',
@@ -62,11 +63,15 @@ export class AddPaymentFormComponent implements OnInit {
     return this.formAdd.get('securityCode');
   }
 
-  constructor(private paymentService: PaymentDetailService) {}
+  constructor(
+    private paymentService: PaymentDetailService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {}
 
   add() {
+    this.spinner.show();
     let newPayment: PaymentDetail = {
       cardOwnerName: this.cardOwnerName?.value,
       cardNumber: this.cardNumber?.value,
@@ -78,10 +83,12 @@ export class AddPaymentFormComponent implements OnInit {
     };
     this.paymentService.postPaymentDetail(newPayment).subscribe(
       (res) => {
+        this.spinner.hide();
         this.newPayment.emit(res);
         this.formAdd.reset();
       },
       (err) => {
+        this.spinner.hide();
         console.log(err);
       }
     );

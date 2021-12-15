@@ -1,6 +1,7 @@
 <!-- <div class="col-md-5 d-flex"> -->
 <form [formGroup]="formAdd" (ngSubmit)="add()">
   <h2>Add <b>Payment</b></h2>
+  <ngx-spinner></ngx-spinner>
   <div class="mb-3">
     <label class="form-label">Card Owner Name</label>
     <input formControlName="cardOwnerName" type="text" class="form-control" />

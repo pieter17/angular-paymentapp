@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PaymentDetailService } from '../../shared/payment-detail.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private paymentDetailService: PaymentDetailService,
     public router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -57,14 +59,17 @@ export class HomeComponent implements OnInit {
   }
 
   deletePayment(id: number) {
+    this.spinner.show();
     if (confirm('Are You Sure Want To Delete Payment id: ' + id)) {
       this.paymentDetailService.deletePaymentDetail(id).subscribe(
         (res) => {
+          this.spinner.hide();
           alert(`Payment ${id} Deleted Successfully`);
           this.getAllPayments();
           this.toastr.error(`Id ${id} deleted successfully`);
         },
         (err) => {
+          this.spinner.hide();
           console.log(err);
         }
       );

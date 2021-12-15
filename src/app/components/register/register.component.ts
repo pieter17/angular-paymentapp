@@ -3,6 +3,7 @@ import { AuthService } from '../../shared/auth.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +24,11 @@ export class RegisterComponent implements OnInit {
     ]),
   });
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -33,11 +38,14 @@ export class RegisterComponent implements OnInit {
   }
 
   addUser() {
+    this.spinner.show();
     this.authService.register(this.formRegister.value).subscribe(
       (res) => {
+        this.spinner.hide();
         this.router.navigate(['/login']);
       },
       (err) => {
+        this.spinner.hide();
         if (Array.isArray(err)) {
           let li = document.createElement('li');
           li.textContent = `${err[0]}`;

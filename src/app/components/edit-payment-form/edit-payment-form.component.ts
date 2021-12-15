@@ -2,6 +2,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PaymentDetailService } from './../../shared/payment-detail.service';
 import { PaymentDetail } from './../../models/paymentDetail';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-edit-payment-form',
@@ -13,7 +14,10 @@ export class EditPaymentFormComponent implements OnInit {
   @Output() putPaymentEvent = new EventEmitter<boolean>();
   pay: PaymentDetail = {} as PaymentDetail;
 
-  constructor(private paymentDetailService: PaymentDetailService) {}
+  constructor(
+    private paymentDetailService: PaymentDetailService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   editForm = new FormGroup({
     paymentDetailId: new FormControl('', [Validators.required]),
@@ -83,6 +87,7 @@ export class EditPaymentFormComponent implements OnInit {
   }
 
   putPayment() {
+    this.spinner.show();
     let editPayment: PaymentDetail = {
       paymentDetailId: this.pay.paymentDetailId,
       cardOwnerName: this.cardOwnerName?.value,
@@ -95,12 +100,14 @@ export class EditPaymentFormComponent implements OnInit {
     };
     this.paymentDetailService.putPaymentDetail(editPayment).subscribe(
       (res) => {
+        this.spinner.hide();
         let ref = document.getElementById('cancelbtn');
         ref?.click();
         this.editForm.reset();
         this.putPaymentEvent.emit(true);
       },
       (err) => {
+        this.spinner.hide();
         console.log(err);
       }
     );
