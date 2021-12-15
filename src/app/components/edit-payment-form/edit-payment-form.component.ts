@@ -89,7 +89,7 @@ export class EditPaymentFormComponent implements OnInit {
       cardNumber: this.cardNumber?.value,
       expirationDate: new Date(
         2000 + Number(this.year?.value),
-        Number(this.month?.value) - 1
+        Number(this.month?.value)
       ),
       securityCode: this.pay.securityCode,
     };

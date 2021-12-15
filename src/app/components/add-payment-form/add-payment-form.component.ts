@@ -67,7 +67,6 @@ export class AddPaymentFormComponent implements OnInit {
   ngOnInit(): void {}
 
   add() {
-    console.log(this.formAdd.value);
     let newPayment: PaymentDetail = {
       cardOwnerName: this.cardOwnerName?.value,
       cardNumber: this.cardNumber?.value,
