@@ -41,7 +41,7 @@ export class EditPaymentFormComponent implements OnInit {
     ]),
   });
 
-  get form() {
+  get eform() {
     return this.editForm.controls;
   }
 

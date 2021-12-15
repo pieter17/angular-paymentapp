@@ -34,10 +34,10 @@
               class="form-control"
             />
             <div
-              *ngIf="form.cardOwnerName.touched && form.cardOwnerName.invalid"
+              *ngIf="eform.cardOwnerName.touched && eform.cardOwnerName.invalid"
               class="alert alert-danger"
             >
-              <div *ngIf="form.cardOwnerName.errors?.required">
+              <div *ngIf="eform.cardOwnerName.errors?.required">
                 cardOwnerName is required.
               </div>
             </div>
@@ -50,13 +50,13 @@
               class="form-control"
             />
             <div
-              *ngIf="form.cardNumber.touched && form.cardNumber.invalid"
+              *ngIf="eform.cardNumber.touched && eform.cardNumber.invalid"
               class="alert alert-danger"
             >
-              <div *ngIf="form.cardNumber.errors?.required">
+              <div *ngIf="eform.cardNumber.errors?.required">
                 cardNumber is required.
               </div>
-              <div *ngIf="form.cardNumber.errors?.pattern">
+              <div *ngIf="eform.cardNumber.errors?.pattern">
                 Enter only number.
               </div>
             </div>
@@ -75,19 +75,19 @@
                   placeholder="month"
                 />
                 <div
-                  *ngIf="form.month.touched && form.month.invalid"
+                  *ngIf="eform.month.touched && eform.month.invalid"
                   class="alert alert-danger"
                 >
-                  <div *ngIf="form.month.errors?.required">
+                  <div *ngIf="eform.month.errors?.required">
                     month is required.
                   </div>
-                  <div *ngIf="form.month.errors?.pattern">
+                  <div *ngIf="eform.month.errors?.pattern">
                     Enter only number in month (1-12).
                   </div>
-                  <div *ngIf="form.month.errors?.max">
+                  <div *ngIf="eform.month.errors?.max">
                     max month 12 (december).
                   </div>
-                  <div *ngIf="form.month.errors?.min">
+                  <div *ngIf="eform.month.errors?.min">
                     min month 1 (january).
                   </div>
                 </div>
@@ -101,13 +101,13 @@
                   placeholder="Year"
                 />
                 <div
-                  *ngIf="form.year.touched && form.year.invalid"
+                  *ngIf="eform.year.touched && eform.year.invalid"
                   class="alert alert-danger"
                 >
-                  <div *ngIf="form.year.errors?.required">
+                  <div *ngIf="eform.year.errors?.required">
                     year is required.
                   </div>
-                  <div *ngIf="form.year.errors?.pattern">
+                  <div *ngIf="eform.year.errors?.pattern">
                     Enter only number in year format (YY).
                   </div>
                 </div>
