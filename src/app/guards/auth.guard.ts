@@ -20,8 +20,16 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    let result: any = await this.auth.refreshToken().toPromise();
-    if (result['success']) return true;
+    let token = this.auth.getAuthorizationToken();
+    let refreshToken = this.auth.getRefreshToken();
+
+    if (token != null && refreshToken != null) {
+      let result: any = await this.auth
+        .refreshToken(token, refreshToken)
+        .toPromise();
+
+      if (result['success']) return true;
+    }
 
     window.alert('You are not authenticated. Please sign in first.');
     // this.showToaster();

@@ -1,62 +1,65 @@
-<ngx-spinner></ngx-spinner>
-<div class="row">
-  <div class="col-md-4 d-flex">
-    <app-add-payment-form
-      (newPayment)="newItemTrigger($event)"
-    ></app-add-payment-form>
-  </div>
-  <!-- -------------------- -->
+<app-nav></app-nav>
+<div class="container-xl">
+  <ngx-spinner></ngx-spinner>
+  <div class="row">
+    <div class="col-md-4 d-flex">
+      <app-add-payment-form
+        (newPayment)="newItemTrigger($event)"
+      ></app-add-payment-form>
+    </div>
+    <!-- -------------------- -->
 
-  <div class="col-md-5 d-flex">
-    <div class="table">
-      <div class="table-wrapper">
-        <div class="table-title">
-          <div class="row">
-            <div class="col-sm-6">
-              <h2>Manage <b>Payments</b></h2>
+    <div class="col-md-5 d-flex">
+      <div class="table">
+        <div class="table-wrapper">
+          <div class="table-title">
+            <div class="row">
+              <div class="col-sm-6">
+                <h2>Manage <b>Payments</b></h2>
+              </div>
             </div>
           </div>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Card Owner Name</th>
+                <th>Card Number</th>
+                <th>Exp. Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let payment of paymentDetails">
+                <td>{{ payment.paymentDetailId }}</td>
+                <td>{{ payment.cardOwnerName }}</td>
+                <td>{{ payment.cardNumber }}</td>
+                <td>{{ payment.expirationDate | date: "MM/yy" }}</td>
+                <td>
+                  <a
+                    (click)="getPaymentById(payment.paymentDetailId!)"
+                    data-bs-target="#editEmployeeModal"
+                    class="btn btn-outline-warning btn-sm edit"
+                    data-bs-toggle="modal"
+                    ><i class="bi bi-pencil"></i
+                  ></a>
+                  <a
+                    class="btn btn-outline-danger btn-sm delete"
+                    data-toggle="modal"
+                    (click)="deletePayment(payment.paymentDetailId!)"
+                    ><i class="bi bi-trash-fill"></i
+                  ></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Card Owner Name</th>
-              <th>Card Number</th>
-              <th>Exp. Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let payment of paymentDetails">
-              <td>{{ payment.paymentDetailId }}</td>
-              <td>{{ payment.cardOwnerName }}</td>
-              <td>{{ payment.cardNumber }}</td>
-              <td>{{ payment.expirationDate | date: "MM/yy" }}</td>
-              <td>
-                <a
-                  (click)="getPaymentById(payment.paymentDetailId!)"
-                  data-bs-target="#editEmployeeModal"
-                  class="btn btn-outline-warning btn-sm edit"
-                  data-bs-toggle="modal"
-                  ><i class="bi bi-pencil"></i
-                ></a>
-                <a
-                  class="btn btn-outline-danger btn-sm delete"
-                  data-toggle="modal"
-                  (click)="deletePayment(payment.paymentDetailId!)"
-                  ><i class="bi bi-trash-fill"></i
-                ></a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
   </div>
-</div>
 
-<app-edit-payment-form
-  [payment]="currPayment"
-  (putPaymentEvent)="updatePaymentTrigger()"
-></app-edit-payment-form>
+  <app-edit-payment-form
+    [payment]="currPayment"
+    (putPaymentEvent)="updatePaymentTrigger()"
+  ></app-edit-payment-form>
+</div>

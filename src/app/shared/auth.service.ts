@@ -19,13 +19,21 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  refreshToken() {
+  refreshToken(tkn: any, ref: any) {
     const token = this.getAuthorizationToken();
     const refreshToken = this.getRefreshToken();
-
+    // console.log(token);
+    // if (token == null) {
+    //   return false;
+    // }
     return this.http
-      .post(`${this.endpoint}/refreshtoken`, { token, refreshToken })
+      .post(`${this.endpoint}/refreshtoken`, { token: tkn, refreshToken: ref })
       .pipe(catchError(this.handleError));
+  }
+
+  removeStorage() {
+    localStorage.removeItem('refresh_token');
+    return localStorage.removeItem('app_token');
   }
 
   getAuthorizationToken() {
